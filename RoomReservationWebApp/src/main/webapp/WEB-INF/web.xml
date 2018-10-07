@@ -1,0 +1,37 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>ServletForm</servlet-name>
+    <servlet-class>training.servlets.ServletForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletForm</servlet-name>
+    <url-pattern>/firstPage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletAddresses</servlet-name>
+    <servlet-class>training.servlets.ServletAddresses</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAddresses</servlet-name>
+    <url-pattern>/addresses</url-pattern>
+  </servlet-mapping>
+    <listener>
+
+    <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+</listener>
+  <servlet>
+    <servlet-name>ServletService</servlet-name>
+      <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+
+      <load-on-startup>1</load-on-startup>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>ServletService</servlet-name>
+    <url-pattern>/hotelService</url-pattern>
+</servlet-mapping>
+</web-app>
