@@ -19,7 +19,7 @@ public class FactoryCommands {
                 if (permission.verify())
                     return new CreateFile(commandName[1], currentDirectory, currentUser);
                 else
-                    System.out.println(PERMISSION);
+                    System.err.println(PERMISSION);
                 return null;
             }
             case "ls": {
@@ -27,7 +27,7 @@ public class FactoryCommands {
                 if (permission.verify())
                     return new ShowDirectoryContent(currentDirectory, currentUser);
                 else
-                    System.out.println(PERMISSION);
+                    System.err.println(PERMISSION);
                 return null;
             }
             case "cd": {
@@ -35,7 +35,7 @@ public class FactoryCommands {
                 if (permission.verify())
                     return new ChangeDirectory(currentDirectory, commandName[1], currentUser);
                 else
-                    System.out.println(PERMISSION);
+                    System.err.println(PERMISSION);
                 return null;
             }
             case "mkdir": {
@@ -43,7 +43,7 @@ public class FactoryCommands {
                 if (permission.verify())
                     return new Mkdir(currentDirectory, commandName[1], currentUser);
                 else
-                    System.out.println(PERMISSION);
+                    System.err.println(PERMISSION);
                 return null;
             }
             case "useradd": {
@@ -73,9 +73,27 @@ public class FactoryCommands {
                         return null;
                     }
                     default: {
-                        System.out.println("Invalid input");
+                        System.err.println("Invalid input");
                         return null;
                     }
+                }
+            }
+            case "chmod": {
+                for (AbstractFile file : currentDirectory.getFiles()) {
+                    if (file.getName().equals(commandName[2]))
+                        return new Chmod(currentUser, file, commandName[1]);
+                }
+                return null;
+
+            }
+            case "cat": {
+                for (AbstractFile file : currentDirectory.getFiles()) {
+                    if (file.getName().equals(commandName[1]) && file instanceof File) {
+                        Permission permission = new PermissionWrite(file, currentUser);
+                        if (permission.verify())
+                            return new Cat((File) file);
+                    }
+                    return null;
                 }
             }
             default:
