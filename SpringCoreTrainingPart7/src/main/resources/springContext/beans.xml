@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="bateria1" class="beans.Baterie" scope="prototype">
+        <property name="voltaj" value="100"></property> <!-- se foloseste de seteri-->
+    </bean>
+    <bean id="baterie2" class="beans.Baterie" init-method="init" destroy-method="destroy">
+        <constructor-arg value="200"></constructor-arg>
+    </bean>
+    <bean id="mouse1" class="beans.Mouse">
+        <property name="baterie" ref="baterie2"></property>
+    </bean>
+
+</beans>
+
